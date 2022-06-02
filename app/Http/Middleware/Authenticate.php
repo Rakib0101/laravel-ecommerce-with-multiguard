@@ -23,7 +23,6 @@ class Authenticate extends Middleware
             if ($request->routeIs('admin.*')) {
 
                 if($request->status) {
-
                     if (Auth::guard('admin')->check()){
                         if (auth()->check()) {
                             return '/admin/home';
@@ -34,6 +33,8 @@ class Authenticate extends Middleware
                     else{
                         return '/admin/login';
                     }        
+                }else{
+                    return '/admin/login';
                 }
             }
             if ($request->routeIs('user.*')) {
@@ -49,6 +50,8 @@ class Authenticate extends Middleware
                     else{
                         return '/user/login';
                     }       
+                }else{
+                    return '/user/login';
                 }
             }
 

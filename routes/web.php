@@ -5,6 +5,7 @@ use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
+use App\Http\Controllers\Backend\AdminProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +55,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
         Route::view('/dashboard','dashboard.admin.home')->name('home');
+        Route::get('/profile',[AdminProfileController::class, 'profile'])->name('profile');
+        Route::get('/profile/edit',[AdminProfileController::class, 'profile_edit'])->name('edit');
+        Route::post('/profile/update',[AdminProfileController::class, 'profile_update'])->name('update');
+        Route::get('/profile/password',[AdminProfileController::class, 'password_edit'])->name('change-password');
+        Route::post('/profile/password',[AdminProfileController::class, 'password_update'])->name('update-password');
+
         Route::post('/logout',[AdminController::class,'logout'])->name('logout');
     });
 

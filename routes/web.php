@@ -5,6 +5,7 @@ use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\AdminProfileController;
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,7 @@ Auth::routes();
 
 
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+Route::get('/', [FrontendController::class, 'index']);
 
 
 

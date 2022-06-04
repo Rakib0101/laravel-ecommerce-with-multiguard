@@ -5,6 +5,7 @@ use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\AdminProfileController;
 /*
@@ -28,7 +29,7 @@ Auth::routes();
 
 
 
-Route::get('/', [FrontendController::class, 'index']);
+Route::get('/', [FrontendController::class, 'index'])->name('home');
 
 
 
@@ -38,12 +39,15 @@ Route::prefix('user')->name('user.')->group(function(){
     Route::middleware(['guest:web','PreventBackHistory'])->group(function(){
           Route::view('/login','dashboard.user.login')->name('login');
           Route::view('/register','dashboard.user.register')->name('register');
+          Route::view('/forget-password','dashboard.user.forget-password')->name('forget_password');
           Route::post('/create',[UserController::class,'create'])->name('create');
           Route::post('/check',[UserController::class,'check'])->name('check');
     });
 
-    Route::middleware(['auth:web','PreventBackHistory'])->group(function(){
-          Route::view('/home','dashboard.user.home')->name('home');
+    Route::middleware(['auth','PreventBackHistory'])->group(function(){
+          Route::view('/profile','dashboard.user.home')->name('home');
+          Route::get('/profile/edit',[UserProfileController::class, 'profile_edit'])->name('edit');
+          Route::post('/profile/update',[UserProfileController::class, 'profileUpdate'])->name('profile_update');
           Route::post('/logout',[UserController::class,'logout'])->name('logout');
           Route::get('/add-new',[UserController::class,'add'])->name('add');
     });

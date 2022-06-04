@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    function create(Request $request){
+    public function create(Request $request){
           //Validate Inputs
           $request->validate([
               'name'=>'required',
@@ -32,7 +32,7 @@ class UserController extends Controller
           }
     }
 
-    function check(Request $request){
+    public function check(Request $request){
         //Validate inputs
         $request->validate([
            'email'=>'required|email|exists:users,email',
@@ -43,14 +43,19 @@ class UserController extends Controller
 
         $creds = $request->only('email','password');
         if( Auth::guard('web')->attempt($creds) ){
-            return redirect()->route('user.home');
+            return redirect()->route('user.home')->with('message', 'login successfully');
         }else{
             return redirect()->route('user.login')->with('fail','Incorrect credentials');
         }
     }
 
-    function logout(){
+    public function logout(){
         Auth::guard('web')->logout();
         return redirect('/user/login');
+    }
+
+    public function forget_password(){
+        
+        return redirect()->route('user.forget_passowrd');
     }
 }

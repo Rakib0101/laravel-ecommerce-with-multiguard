@@ -25,7 +25,7 @@
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
                                 href="{{ route('user.logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                            <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form">
+                            <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form"></form>
                         </li>
                     </ul>
                 </div>
@@ -34,7 +34,7 @@
                 <h4>Welcome Mr {{Auth::user()->name}} to your dashboard !!</h4>
                 <div style="background: #0f0f23; color: #fff; padding: 20px; margin-bottom: 30px;">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <form action="{{ route('user.profile_update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.profile_update') }}" method="POST" enctype="multipart/form-data" id="update-form">
                         @csrf
                         <div class="row">
                             <div class="col-12">

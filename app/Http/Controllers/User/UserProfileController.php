@@ -6,9 +6,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class UserProfileController extends Controller
 {
+    public function home()
+    {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        return view('dashboard.user.home', compact('user'));
+    }
     public function profile_edit()
     {
         $userId = Auth::user()->id;
@@ -17,13 +24,13 @@ class UserProfileController extends Controller
     }
     public function profileUpdate(Request $request)
     {
-        return "Hi";
+        // return "Hi";
         $userId = Auth::user()->id;
         $user = User::find($userId);
         
         $user->name = $request->name;
         $user->email = $request->email;
-        dd($request);
+        // dd($request);
         // if($request->file('image')){
         //     $file = $request->file('image');
         //     $file_name = date().$file->getClientOriginalName();
@@ -47,30 +54,30 @@ class UserProfileController extends Controller
         return redirect()->route('user.home')->with('message', 'profile updated successfully');
     }
 
-    public function password_edit()
-    {
-        $admin = Admin::find(1);
-        return view('dashboard.admin.password', compact('admin'));
-    }
+    // public function password_edit()
+    // {
+    //     $admin = Admin::find(1);
+    //     return view('dashboard.admin.password', compact('admin'));
+    // }
 
-    public function password_update(Request $request)
-    {
-        $validateData = $request->validate([
-                'oldpassword'=>'required',
-                'password'=>'required',
-                'cpassword'=>'required|same:password'
-          ]);
+    // public function password_update(Request $request)
+    // {
+    //     $validateData = $request->validate([
+    //             'oldpassword'=>'required',
+    //             'password'=>'required',
+    //             'cpassword'=>'required|same:password'
+    //       ]);
 
-        $hashPassword = Admin::find(1)->password;
+    //     $hashPassword = Admin::find(1)->password;
 
-        if(Hash::check($request->oldpassword, $hashPassword)){
-            $admin = Admin::find(1);
-            $admin->password = Hash::make($request->password);
-            $admin->save();
-            Auth::logout();
-            return redirect()->route('admin.login')->with('message', 'password update successfully, please login now !');
-        }else{
-            return redirect()->back();
-        }
-    }
+    //     if(Hash::check($request->oldpassword, $hashPassword)){
+    //         $admin = Admin::find(1);
+    //         $admin->password = Hash::make($request->password);
+    //         $admin->save();
+    //         Auth::logout();
+    //         return redirect()->route('admin.login')->with('message', 'password update successfully, please login now !');
+    //     }else{
+    //         return redirect()->back();
+    //     }
+    // }
 }

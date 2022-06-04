@@ -40,7 +40,7 @@
 
                     </div>
                     <div style="text-align:center;">
-                        <img style="border-radius:50%; width:80px; height: 80px;" src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="User Avatar">
+                        <img style="border-radius:50%; width:80px; height: 80px;" src="{{ ($user->image) ? asset('uploads/user/'.$user->image) :asset('backend/images/user3-128x128.jpg')  }}">
                     </div>
                     <div class="box-footer">
                         <div class="row">

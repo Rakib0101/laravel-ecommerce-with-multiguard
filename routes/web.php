@@ -45,9 +45,9 @@ Route::prefix('user')->name('user.')->group(function(){
     });
 
     Route::middleware(['auth','PreventBackHistory'])->group(function(){
-          Route::view('/profile','dashboard.user.home')->name('home');
+          Route::get('/profile', [UserProfileController::class, 'home'])->name('home');
           Route::get('/profile/edit',[UserProfileController::class, 'profile_edit'])->name('edit');
-          Route::post('/profile/update',[UserProfileController::class, 'profileUpdate'])->name('profile_update');
+          Route::post('/profile/change',[UserProfileController::class, 'profileUpdate'])->name('profile_update');
           Route::post('/logout',[UserController::class,'logout'])->name('logout');
           Route::get('/add-new',[UserController::class,'add'])->name('add');
     });

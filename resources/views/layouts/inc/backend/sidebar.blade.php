@@ -17,38 +17,36 @@
       <!-- sidebar menu-->
       <ul class="sidebar-menu" data-widget="tree">  
 		  
-		<li>
+		<li class="{{ (request()->is('admin/dashboard')) ? 'active': '' }}">
           <a href="{{ route('admin.home') }}">
             <i data-feather="pie-chart"></i>
 			<span>Dashboard</span>
           </a>
         </li>  
 		
-        <li class="treeview">
-          <a href="#">
+        <li class="treeview {{ (request()->is('admin/brands*')) ? 'active': '' }}">
+          <a href="{{ route('admin.brands.index') }}">
             <i data-feather="message-circle"></i>
-            <span>Application</span>
+            <span>Brands</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="chat.html"><i class="ti-more"></i>Chat</a></li>
-            <li><a href="calendar.html"><i class="ti-more"></i>Calendar</a></li>
+            <li class="{{ (request()->is('admin/brands*')) ? 'active': '' }}"><a href="{{ route('admin.brands.index') }}"><i class="ti-more"></i>All Brands</a></li>
           </ul>
         </li> 
 		  
-        <li class="treeview">
-          <a href="#">
-            <i data-feather="mail"></i> <span>Mailbox</span>
+        <li class="treeview {{ (request()->is('admin/categories*')) ? 'active': '' }}">
+          <a href="{{ route('admin.category.index') }}">
+            <i data-feather="mail"></i> <span>Categories</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="mailbox_inbox.html"><i class="ti-more"></i>Inbox</a></li>
-            <li><a href="mailbox_compose.html"><i class="ti-more"></i>Compose</a></li>
-            <li><a href="mailbox_read_mail.html"><i class="ti-more"></i>Read</a></li>
+            <li class="{{ (request()->is('admin/categories*')) ? 'active': '' }}"><a href="{{ route('admin.category.index') }}"><i class="ti-more"></i>All Categories</a></li>
+            <li class="{{ (request()->is('admin/categories*')) ? 'active': '' }}"><a href="{{ route('admin.sub_category.index') }}"><i class="ti-more"></i>All Sub Categories</a></li>
           </ul>
         </li>
 		

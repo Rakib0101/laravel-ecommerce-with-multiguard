@@ -14,18 +14,21 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
+                <div class="profile-image" style="margin-bottom: 20px; text-align:center;">
+                    <img style="border-radius:50%; width:150px; height: 150px;" src="{{ ($user->image) ? asset('uploads/user/'.$user->image) :asset('backend/images/user3-128x128.jpg')  }}">
+                </div>
                 <div class="profile-navbar bg-info" style="padding: 10px 20px;">
                     <ul class="">
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
-                                href="">Dashboard</a></li>
+                                href="{{ route('user.home') }}">Dashboard</a></li>
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
                                 href="{{  route('user.edit') }}">Profile Update</a></li>
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
-                                href="">Change Password</a></li>
+                                href="{{ route('user.change-password') }}">Change Password</a></li>
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
                                 href="{{ route('user.logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                            <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form">
+                            <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form"></form>
                         </li>
                     </ul>
                 </div>

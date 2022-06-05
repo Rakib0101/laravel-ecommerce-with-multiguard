@@ -3,7 +3,10 @@
 <div class="breadcrumb">
     <div class="container">
         <div class="breadcrumb-inner">
-            
+            <ul class="list-inline list-unstyled">
+                <li><a href="home.html">Home</a></li>
+                <li class='active'>Dashboard</li>
+            </ul>
         </div><!-- /.breadcrumb-inner -->
     </div><!-- /.container -->
 </div><!-- /.breadcrumb -->
@@ -14,15 +17,15 @@
                 <div class="profile-navbar bg-info" style="padding: 10px 20px;">
                     <ul class="">
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
-                                href="{{ route('user.home') }}">Dashboard</a></li>
+                                href="">Dashboard</a></li>
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
-                                href="{{  route('user.edit') }}">Profile Update</a></li>
+                                href="">Profile Update</a></li>
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
-                                href="{{ route('user.change-password') }}">Change Password</a></li>
+                                href="">Change Password</a></li>
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
                                 href="{{ route('user.logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                            <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form">
+                            <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form"></form>
                         </li>
                     </ul>
                 </div>
@@ -31,55 +34,50 @@
                 <h4>Welcome Mr {{Auth::user()->name}} to your dashboard !!</h4>
                 <div style="background: #0f0f23; color: #fff; padding: 20px; margin-bottom: 30px;">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <form action="{{ route('user.profile_update') }}" method="POST" enctype="multipart/form-data" id="update-form">
-                        @csrf
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <h5>Name <span class="text-danger"> * </span> </h5>
+                    <form action="{{  route('user.update-password') }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="form-group">
+                                        <h5>Current Password <span class="text-danger"> * </span> </h5>
                                         <div class="controls">
-                                            <input type="text" name="name" class="form-control" required data -
-                                                validation - required - message="This field is required"
-                                                value="{{$user->name}}">
+                                            <input type="password" name="oldpassword" class="form-control" required data -
+                                                validation - required - message="This field is required">
+                                                <span class="text-danger">@error('oldpassword'){{ $message }}@enderror</span>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group">
                                         <h5>
-                                            Email
+                                            New Password
                                             <span class="text-danger">
                                                 *
                                             </span> </h5>
                                         <div class="controls">
-                                            <input type="email" name="email" class="form-control" required data -
+                                            <input type="password" name="password" class="form-control" required data -
                                                 validation - required - message="This field is required"
-                                                value="{{$user->email}}">
-
+                                                >
+                                            <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group">
                                         <h5>
-                                            Profile
-                                            Image </h5>
+                                            Confirm Password
+                                            <span class="text-danger">
+                                                *
+                                            </span> </h5>
                                         <div class="controls">
-                                            <input id="inputImage" type="file" name="image" class="form-control">
+                                            <input type="password" name="cpassword" class="form-control" required data -
+                                                validation - required - message="This field is required">
+                                            <span class="text-danger">@error('cpassword'){{ $message }}@enderror</span>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <img id="showImage"
-                                            src="{{ !empty($user->image) ? asset('uploads/user/'.$user->image): asset('backend/images/avatar/avatar-1.png') }}"
-                                            alt="">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="text-xs-right">
-                            <button type="submit" class="btn btn-rounded btn-info">
-                                Submit
-                            </button> </div>
-                    </form>
+                            <div class="text-xs-right">
+                                <button type="submit" class="btn btn-rounded btn-info">
+                                    Submit
+                                </button> </div>
+                        </form>
                 </div>
             </div>
         </div>

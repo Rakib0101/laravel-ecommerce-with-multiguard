@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class UserProfileController extends Controller
 {
@@ -54,30 +55,37 @@ class UserProfileController extends Controller
         return redirect()->route('user.home')->with('message', 'profile updated successfully');
     }
 
-    // public function password_edit()
-    // {
-    //     $admin = Admin::find(1);
-    //     return view('dashboard.admin.password', compact('admin'));
-    // }
+    public function password_edit()
+    {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        return view('dashboard.user.password', compact('user'));
+    }
 
-    // public function password_update(Request $request)
-    // {
-    //     $validateData = $request->validate([
-    //             'oldpassword'=>'required',
-    //             'password'=>'required',
-    //             'cpassword'=>'required|same:password'
-    //       ]);
+    public function password_update(Request $request)
+    {
+        $user->oldpassword = Hash::make($request->password);
+        $validateData = $request->validate([
+                'oldpassword'=>'required',
+                'password'=>'required|min:6',
+                'cpassword'=>'required|same:password'
+          ],[
+              'cpassword.same' => 'password and confrim password does not match',
+          ]);
 
-    //     $hashPassword = Admin::find(1)->password;
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
 
-    //     if(Hash::check($request->oldpassword, $hashPassword)){
-    //         $admin = Admin::find(1);
-    //         $admin->password = Hash::make($request->password);
-    //         $admin->save();
-    //         Auth::logout();
-    //         return redirect()->route('admin.login')->with('message', 'password update successfully, please login now !');
-    //     }else{
-    //         return redirect()->back();
-    //     }
-    // }
+        $hashPassword = $user->password;
+
+        if(Hash::check($request->oldpassword, $hashPassword)){
+            
+            $user->password = Hash::make($request->password);
+            $user->save();
+            Auth::logout();
+            return redirect()->route('user.login')->with('message', 'password update successfully, please login now !');
+        }else{
+            return redirect()->back();
+        }
+    }
 }

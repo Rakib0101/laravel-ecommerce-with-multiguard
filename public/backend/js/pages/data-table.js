@@ -73,7 +73,7 @@ $(function () {
 	//---------------Form inputs
 	var table = $('#example6').DataTable();
  
-    $('button').click( function() {
+    $('#button').click( function() {
         var data = table.$('input, select').serialize();
         alert(
             "The following data would have been submitted to the server: \n\n"+

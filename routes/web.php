@@ -5,8 +5,11 @@ use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
+use App\Http\Controllers\Backend\BrandsController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\AdminProfileController;
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +51,11 @@ Route::prefix('user')->name('user.')->group(function(){
           Route::get('/profile', [UserProfileController::class, 'home'])->name('home');
           Route::get('/profile/edit',[UserProfileController::class, 'profile_edit'])->name('edit');
           Route::post('/profile/change',[UserProfileController::class, 'profileUpdate'])->name('profile_update');
+          Route::get('/profile/password',[UserProfileController::class, 'password_edit'])->name('change-password');
+          Route::post('/profile/password',[UserProfileController::class, 'password_update'])->name('update-password');
           Route::post('/logout',[UserController::class,'logout'])->name('logout');
           Route::get('/add-new',[UserController::class,'add'])->name('add');
+
     });
 
 });
@@ -72,7 +78,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/profile/password',[AdminProfileController::class, 'password_update'])->name('update-password');
 
         Route::post('/logout',[AdminController::class,'logout'])->name('logout');
+        
+
+        //brands crud
+        Route::resource('brands',BrandsController::class);
+
+        //category crud 
+        Route::resource('category', CategoryController::class);
+
+        //sub category crud 
+        Route::resource('sub_category', SubCategoryController::class);
     });
 
 });
-

@@ -11,6 +11,7 @@ use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\ChildCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,6 +89,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //sub category crud 
         Route::resource('sub_category', SubCategoryController::class);
+
+        //child category crud 
+        Route::resource('child_category', ChildCategoryController::class);
     });
 
 });

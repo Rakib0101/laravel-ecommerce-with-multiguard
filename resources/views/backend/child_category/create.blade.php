@@ -1,7 +1,5 @@
 @extends('layouts.backend-master')
 @section('content')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"> </script>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="d-flex align-items-center">
@@ -25,25 +23,21 @@
 
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Edit Sub Category</h3>
-                    <a href="{{route('admin.category.index')}}" class="btn btn-primary" style="float:right;">Back to sub category
-                        List</a>
+                    <h3 class="box-title">Add Child Category</h3>
+                    <a href="{{route('admin.brands.index')}}" class="btn btn-primary" style="float:right;">Back to Child Category List</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form action="{{ route('admin.sub_category.update', $sub_category->id)}}" method="POST" enctype="multipart/form-data">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <form action="{{ route('admin.child_category.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="form-group col-12">
-                            <h5>Select Parent Category (English) <span class="text-danger"> * </span> </h5>
+                            <h5>Select Parent Category <span class="text-danger"> * </span> </h5>
                             <div class="controls">
                                 <select name="category_id" id=""  class="form-control">
                                     <option value="0" disable style="display:none">All Select</option>
                                     @foreach ($categories as $item)
-                                        <option value="{{$item->id}}" 
-                                           {{ ($item->id === $sub_category->category_id) ?
-                                            'selected' : ''  }}>
-                                            {{$item->category_name_en}}</option>
+                                        <option value="{{$item->id}}">{{$item->category_name_en}}</option>
                                     @endforeach
                                     
                                 </select>
@@ -55,10 +49,27 @@
                             </div>
                         </div>
                         <div class="form-group col-12">
+                            <h5>Select Sub Category <span class="text-danger"> * </span> </h5>
+                            <div class="controls">
+                                <select name="sub_category_id" id=""  class="form-control">
+                                    <option value="0" disable style="display:none">All Select</option>
+                                    @foreach ($sub_categories as $item)
+                                        <option value="{{$item->id}}">{{$item->sub_category_name_en}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                                @error('sub_category_id')
+                                            <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group col-12">
                             <h5>Sub Category Name (English) <span class="text-danger"> * </span> </h5>
                             <div class="controls">
-                                <input type="text" name="sub_category_name_en" class="form-control" value="sub_category_name_en">
-                                @error('sub_category_name_en')
+                                <input type="text" name="child_category_name_en" class="form-control">
+                                @error('category_name_en')
                                             <span class="text-danger">
                                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -72,34 +83,27 @@
                                     *
                                 </span> </h5>
                             <div class="controls">
-                                <input type="text" name="sub_category_name_bn" class="form-control" value="sub_category_name_bn">
-                                @error('sub_category_name_bn')
+                                <input type="text" name="child_category_name_bn" class="form-control">
+                                @error('category_name_bn')
                                             <span class="text-danger">
                                                 <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-6">
-                                <h5>
-                                    Sub Category
-                                    Image <span class="text-danger">
-                                        *
-                                    </span></h5>
-                                <div class="controls">
-                                    <input type="file" id="inputImage" name="sub_category_image" class="form-control">
-                                    @error('sub_brand_image')
-                                    <span class="text-danger">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <img id="showImage"
-                                    src="{{ !empty($sub_category->sub_category_image) ? asset('uploads/sub_category/'.$sub_category->sub_category_image): asset('frontend/images/brands/brand1.png') }}"
-                                    alt="">
+                        <div class="form-group col-12">
+                            <h5>
+                                Category
+                                Image <span class="text-danger">
+                                    *
+                                </span></h5>
+                            <div class="controls">
+                                <input type="file" name="child_category_image" class="form-control">
+                                @error('category_image')
+                                            <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="text-xs-right">
@@ -113,17 +117,4 @@
         </div>
     </div>
 </section>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#inputImage').change(function (e) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#showImage').attr('src',
-                    e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-
-</script>
 @endsection

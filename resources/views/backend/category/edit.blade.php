@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-6">
                                 <img id="showImage"
-                                    src="{{ !empty($category->category_image) ? asset('uploads/brand/'.$category->category_image): asset('frontend/images/brands/brand1.png') }}"
+                                    src="{{ !empty($category->category_image) ? asset('uploads/category/'.$category->category_image): asset('frontend/images/brands/brand1.png') }}"
                                     alt="">
                             </div>
                         </div>

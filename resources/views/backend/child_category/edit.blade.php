@@ -31,17 +31,17 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form action="{{ route('admin.sub_category.update', $sub_category->id)}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.child_category.update', $child_category->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group col-12">
-                            <h5>Select Parent Category (English) <span class="text-danger"> * </span> </h5>
+                            <h5>Select Parent Category <span class="text-danger"> * </span> </h5>
                             <div class="controls">
                                 <select name="category_id" id=""  class="form-control">
                                     <option value="0" disable style="display:none">All Select</option>
                                     @foreach ($categories as $item)
                                         <option value="{{$item->id}}" 
-                                           {{ ($item->id === $sub_category->category_id) ?
+                                           {{ ($item->id === $child_category->category_id) ?
                                             'selected' : ''  }}>
                                             {{$item->category_name_en}}</option>
                                     @endforeach
@@ -55,10 +55,30 @@
                             </div>
                         </div>
                         <div class="form-group col-12">
-                            <h5>Sub Category Name (English) <span class="text-danger"> * </span> </h5>
+                            <h5>Select Sub Category  <span class="text-danger"> * </span> </h5>
                             <div class="controls">
-                                <input type="text" name="sub_category_name_en" class="form-control" value="sub_category_name_en">
-                                @error('sub_category_name_en')
+                                <select name="sub_category_id" id=""  class="form-control">
+                                    <option value="0" disable style="display:none">All Select</option>
+                                    @foreach ($sub_categories as $item)
+                                        <option value="{{$item->id}}" 
+                                           {{ ($item->id === $child_category->sub_category_id) ?
+                                            'selected' : ''  }}>
+                                            {{$item->sub_category_name_en}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                                @error('sub_category_id')
+                                            <span class="text-danger">
+                                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group col-12">
+                            <h5>Child Category Name (English) <span class="text-danger"> * </span> </h5>
+                            <div class="controls">
+                                <input type="text" name="child_category_name_en" class="form-control" value="child_category_name_en">
+                                @error('child_category_name_en')
                                             <span class="text-danger">
                                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -72,8 +92,8 @@
                                     *
                                 </span> </h5>
                             <div class="controls">
-                                <input type="text" name="sub_category_name_bn" class="form-control" value="sub_category_name_bn">
-                                @error('sub_category_name_bn')
+                                <input type="text" name="child_category_name_bn" class="form-control" value="child_category_name_bn">
+                                @error('child_category_name_bn')
                                             <span class="text-danger">
                                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -88,8 +108,8 @@
                                         *
                                     </span></h5>
                                 <div class="controls">
-                                    <input type="file" id="inputImage" name="sub_category_image" class="form-control">
-                                    @error('sub_brand_image')
+                                    <input type="file" id="inputImage" name="child_category_image" class="form-control">
+                                    @error('child_brand_image')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -98,7 +118,7 @@
                             </div>
                             <div class="col-6">
                                 <img id="showImage"
-                                    src="{{ !empty($sub_category->sub_category_image) ? asset('uploads/sub_category/'.$sub_category->sub_category_image): asset('frontend/images/brands/brand1.png') }}"
+                                    src="{{ !empty($child_category->child_category_image) ? asset('uploads/child_category/'.$child_category->child_category_image): asset('frontend/images/brands/brand1.png') }}"
                                     alt="">
                             </div>
                         </div>

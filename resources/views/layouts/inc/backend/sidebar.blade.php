@@ -47,6 +47,7 @@
           <ul class="treeview-menu">
             <li class="{{ (request()->is('admin/categories*')) ? 'active': '' }}"><a href="{{ route('admin.category.index') }}"><i class="ti-more"></i>All Categories</a></li>
             <li class="{{ (request()->is('admin/categories*')) ? 'active': '' }}"><a href="{{ route('admin.sub_category.index') }}"><i class="ti-more"></i>All Sub Categories</a></li>
+            <li class="{{ (request()->is('admin/categories*')) ? 'active': '' }}"><a href="{{ route('admin.child_category.index') }}"><i class="ti-more"></i>All Child Categories</a></li>
           </ul>
         </li>
 		

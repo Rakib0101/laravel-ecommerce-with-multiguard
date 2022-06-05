@@ -44,7 +44,7 @@
                                 @foreach ($sub_categories as $category)
 
                                 <tr>
-                                    <td>{{$category->category_id}}</td>
+                                    <td>{{$category->category->category_name_en}}</td>
                                     <td>{{$category->sub_category_name_en}}</td>
                                     <td>{{$category->sub_category_name_bn}}</td>
                                     <td><img src="{{asset('uploads/sub_category/'.$category->sub_category_image)}}" alt=""

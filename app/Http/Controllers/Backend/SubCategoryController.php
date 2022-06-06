@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ChildCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
@@ -47,7 +48,6 @@ class SubCategoryController extends Controller
             'category_id' => 'required',
             'sub_category_name_en' => 'required',
             'sub_category_name_bn' => 'required',
-            'sub_category_image' => 'required|image',
         ]);
         $sub_category = SubCategory::create([
             'category_id' => $request->category_id,
@@ -141,5 +141,19 @@ class SubCategoryController extends Controller
             return redirect()->route('admin.sub_category.index')->with('message', 'category deleted successfully');
         }
     }
+
+    public function GetSubCategory($category_id){
+         
+        $subcat = SubCategory::where('category_id',$category_id)->orderBy('sub_category_name_en','ASC')->get();
+        // return json_encode($subcat);
+        return response()->json($subcat);
+    }
+
+    public function GetChildCategory($sub_category_id){
+
+        $subsubcat = ChildCategory::where('sub_category_id',$sub_category_id)->orderBy('child_category_name_en','ASC')->get();
+        return response()->json($subsubcat);
+    }
+
 }
 

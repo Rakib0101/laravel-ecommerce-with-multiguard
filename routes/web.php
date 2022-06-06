@@ -6,6 +6,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Backend\BrandsController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -92,6 +93,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //child category crud 
         Route::resource('child_category', ChildCategoryController::class);
+
+        //child category crud 
+        Route::resource('product', ProductController::class);
     });
 
 });
+
+
+Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
+
+Route::get('/sub-subcategory/ajax/{sub_category_id}', [SubCategoryController::class, 'GetChildCategory']);

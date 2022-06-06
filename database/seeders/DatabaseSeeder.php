@@ -24,13 +24,6 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => null,
             'password' => Hash::make('111111')
         ]);
-        Doctor::create([
-            'name' => 'doctor',
-            'hospital' => 'HpB',
-            'email' => 'doctor@mail.com',
-            'email_verified_at' => null,
-            'password' => Hash::make('111111')
-        ]);
         User::create([
             'name' => 'user',
             'email' => 'user@mail.com',

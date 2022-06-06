@@ -66,7 +66,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="profile.html"><i class="ti-more"></i>All Products</a></li>
+                    <li><a href="{{route('admin.product.index')}}"><i class="ti-more"></i>All Products</a></li>
+                    <li><a href="{{route('admin.product.create')}}"><i class="ti-more"></i>Add Product</a></li>
+                    <li><a href="#"><i class="ti-more"></i>Manage Product</a></li>
                 </ul>
             </li>
 

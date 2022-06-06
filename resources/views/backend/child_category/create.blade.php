@@ -1,5 +1,9 @@
 @extends('layouts.backend-master')
+@section('script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@endsection
 @section('content')
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="d-flex align-items-center">
@@ -53,9 +57,11 @@
                             <div class="controls">
                                 <select name="sub_category_id" id=""  class="form-control">
                                     <option value="0" disable style="display:none">All Select</option>
-                                    @foreach ($sub_categories as $item)
-                                        <option value="{{$item->id}}">{{$item->sub_category_name_en}}</option>
-                                    @endforeach
+                                    {{-- @foreach ($sub_categories as $item) --}}
+                                        {{-- <option value=""> --}}
+                                            {{-- {{$item->sub_category_name_en}} --}}
+                                        {{-- </option>
+                                    @endforeach --}}
                                     
                                 </select>
                                 @error('sub_category_id')
@@ -117,4 +123,60 @@
         </div>
     </div>
 </section>
+
+
+@endsection
+@section('script-footer')
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('select[name="category_id"]').on('change', function () {
+            var category_id = $(this).val();
+            console.log(category_id);
+            if (category_id) {
+                $.ajax({
+                    url: "{{  url('/subcategory/ajax') }}/" + category_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        var d = $('select[name="sub_category_id"]').empty();
+                        $.each(data, function (key, value) {
+                            $('select[name="sub_category_id"]').append(
+                                '<option value="' + value.id + '">' + value
+                                .sub_category_name_en + '</option>');
+                        });
+                    },
+                    error: function (data){
+                        console.log('Hi');
+                        console.log(data);
+                    }
+                });
+            } else {
+                alert('danger');
+            }
+        });
+        // $('select[name="sub_category_id"]').on('change', function () {
+        //     var sub_category_id = $(this).val();
+        //     if (sub_category_id) {
+        //         $.ajax({
+        //             url: "{{  url('/category/sub-subcategory/ajax') }}/" + sub_category_id,
+        //             type: "GET",
+        //             dataType: "json",
+        //             success: function (data) {
+        //                 var d = $('select[name="child_category_id"]').empty();
+        //                 $.each(data, function (key, value) {
+        //                     $('select[name="child_category_id"]').append(
+        //                         '<option value="' + value.id + '">' + value
+        //                         .child_category_name_en + '</option>');
+        //                 });
+        //             },
+        //         });
+        //     } else {
+        //         alert('danger');
+        //     }
+        // });
+
+    });
+
+</script>
 @endsection

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Category;
 use App\Models\SubCategory;
-use App\Models\ChildCategory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\ChildCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
@@ -50,7 +50,6 @@ class ChildCategoryController extends Controller
             'sub_category_id' => 'required',
             'child_category_name_en' => 'required',
             'child_category_name_bn' => 'required',
-            'child_category_image' => 'required|image',
         ]);
         $child_category = ChildCategory::create([
             'category_id' => $request->category_id,

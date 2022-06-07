@@ -136,6 +136,7 @@ class ChildCategoryController extends Controller
      */
     public function destroy(ChildCategory $child_category)
     {
+        return $child_category;
         if($child_category){
             $destination = 'uploads/child_category/'.$child_category->child_category_image;
             if(File::exists($destination)){

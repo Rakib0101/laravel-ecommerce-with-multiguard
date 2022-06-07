@@ -6,10 +6,12 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Backend\BrandsController;
+use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -94,11 +96,20 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //child category crud 
         Route::resource('child_category', ChildCategoryController::class);
 
-        //child category crud 
+        //product crud 
         Route::resource('product', ProductController::class);
+
+        //product crud 
+        Route::resource('slider', SliderController::class);
+
+        Route::post('/image/update', [ProductController::class, 'UpdateImage'])->name('product.updateThambnail');
     });
 
 });
+
+Route::get('/language/english}', [LanguageController::class, 'english'])->name('language.english');
+
+Route::get('/language/bangla}', [LanguageController::class, 'bangla'])->name('language.bangla');
 
 
 Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);

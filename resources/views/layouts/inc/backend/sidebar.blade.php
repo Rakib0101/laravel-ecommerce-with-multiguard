@@ -72,6 +72,19 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Slider</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.slider.index')}}"><i class="ti-more"></i>All Slider</a></li>
+                </ul>
+            </li>
+
         </ul>
     </section>
 

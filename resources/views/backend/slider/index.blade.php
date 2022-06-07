@@ -1,15 +1,16 @@
 @extends('layouts.backend-master')
 @section('content')
+<!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="page-title">Products List</h3>
+            <h3 class="page-title">Data Tables</h3>
             <div class="d-inline-block align-items-center">
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-                        <li class="breadcrumb-item" aria-current="page">Dashboard</li>
-                        <li class="breadcrumb-item active" aria-current="page">Products List</li>
+                        <li class="breadcrumb-item" aria-current="page">Tables</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Tables</li>
                     </ol>
                 </nav>
             </div>
@@ -22,9 +23,9 @@
 
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Products List</h3>
-                    <a href="{{route('admin.product.create')}}" class="btn btn-primary" style="float:right;">Add New
-                        Product</a>
+                    <h3 class="box-title">Brand List</h3>
+                    <a href="{{route('admin.slider.create')}}" class="btn btn-primary" style="float:right;">Add New
+                        Brand</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -33,29 +34,29 @@
                             <thead>
                                 <tr>
                                     <th>Image</th>
-                                    <th>Name(En)</th>
-                                    <th>Name (Hin)</th>
-                                    <th>Quantity</th>
+                                    <th>Title</th>
+                                    <th>Sub Title</th>
+                                    <th>Active</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($sliders as $slider)
 
                                 <tr>
-                                    <td><img src="{{asset('uploads/product/thumbnail/'.$product->product_thambnail)}}" alt=""
+                                    <td><img src="{{asset('uploads/slider/'.$slider->slider_image)}}" alt=""
                                             style="width:70px; height: 40px;"></td>
-                                    <td>{{$product->product_name_en}}</td>
-                                    <td>{{$product->product_name_bn}}</td>
-                                    <td>{{$product->product_qty}}</td>
+                                    <td>{{$slider->title}}</td>
+                                    <td>{{$slider->sub_title}}</td>
+                                    <td>{{$slider->status === 1? 'active': 'disable'}}</td>
                                     <td style="display:flex;">
                                         {{-- <a class="mr-2 btn btn-success"
-                                            href="{{ route('admin.brands.show', $product->id) }}"><i
+                                            href="{{ route('admin.brands.show', $slider->id) }}"><i
                                                 class="fa fa-eye"></i></a> --}}
                                         <a class="mr-2 btn btn-primary"
-                                            href="{{ route('admin.product.edit', $product->id) }}"><i
+                                            href="{{ route('admin.slider.edit', $slider->id) }}"><i
                                                 class="fa fa-edit"></i></a>
-                                        <form action="{{ route('admin.product.destroy', $product->id) }}" class="mr-1"
+                                        <form action="{{ route('admin.slider.destroy', $slider->id) }}" class="mr-1"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -76,5 +77,4 @@
         </div>
     </div>
 </section>
-    
 @endsection

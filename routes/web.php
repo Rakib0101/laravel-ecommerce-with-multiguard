@@ -37,6 +37,8 @@ Auth::routes();
 
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/product/view/modal/{id}', [FrontendController::class, 'ProductViewAjax']);
+Route::get('/product/{product:id}', [FrontendController::class, 'productDetails'])->name('product-details');
 
 
 

@@ -5,6 +5,8 @@ use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProductController;
@@ -39,6 +41,15 @@ Auth::routes();
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/product/view/modal/{id}', [FrontendController::class, 'ProductViewAjax']);
 Route::get('/product/{product:id}', [FrontendController::class, 'productDetails'])->name('product-details');
+// Add to Cart Store Data
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']); 
+// Get Data from cart
+Route::get('/product/mini/cart/', [CartController::class, 'getCart']);
+// Remove mini cart
+Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'removeCart']);
+//wishlist
+Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToWishlist']); 
+
 
 
 

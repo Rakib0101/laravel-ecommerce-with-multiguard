@@ -36,6 +36,7 @@ class FrontendController extends Controller
 
         /// Product View With Ajax
 	public function ProductViewAjax($id){
+
 		$product = Product::with('category','brand')->findOrFail($id);
 
 		$color = $product->product_color_en;

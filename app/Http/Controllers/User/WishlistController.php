@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
@@ -86,15 +88,15 @@ class WishlistController extends Controller
 
     // add to wishlist mehtod 
 
-			public function AddToWishlist(Request $request, $product_id){
-                dd($request);
+			public function AddToWishlist(Request $request, $id){
+                
 				if (Auth::check()) {
 
-					$exists = Wishlist::where('user_id',Auth::id())->where('product_id',$product_id)->first();
+					$exists = Wishlist::where('user_id',Auth::id())->where('product_id',$id)->first();
 		
 					Wishlist::create([
 						'user_id' => Auth::id(), 
-						'product_id' => $product_id, 
+						'product_id' => $id, 
 						'created_at' => Carbon::now(), 
 					]);
 				   return response()->json(['success' => 'Successfully Added On Your Wishlist']);

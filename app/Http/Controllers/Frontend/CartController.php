@@ -11,7 +11,7 @@ class CartController extends Controller
 {
     public function AddToCart(Request $request, $id){
 
-        return response()->json($request);
+        // return response()->json($request);
 
     	$product = Product::findOrFail($id);
 

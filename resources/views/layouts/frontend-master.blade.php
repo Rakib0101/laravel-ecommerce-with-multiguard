@@ -48,6 +48,8 @@
     {{-- footer --}}
     @include('layouts.inc.frontend.footer')
 
+    {{-- @include('frontend.modal.add-to-cart') --}}
+
     <!-- JavaScripts placed at the end of the document so the pages load faster -->
     <script src="{{ asset('frontend/assets/js/jquery-1.11.1.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
@@ -132,7 +134,7 @@
 
         }
     </script>
-
+    
     <script type="text/javascript">
         // Start Add To Cart Product 
         function addToCart() {
@@ -274,18 +276,19 @@
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
-                        icon: 'success',
                         showConfirmButton: false,
                         timer: 3000
                     })
                     if ($.isEmptyObject(data.error)) {
                         Toast.fire({
                             type: 'success',
+                            icon: 'success',
                             title: data.success
                         })
                     } else {
                         Toast.fire({
                             type: 'error',
+                            icon: 'error',
                             title: data.error
                         })
                     }

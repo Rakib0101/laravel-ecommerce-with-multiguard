@@ -17,7 +17,8 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+        $wishlists = Wishlist::with('product')->where('user_id', Auth::id())->latest()->get();
+        return view('frontend.wishlist.index', compact('wishlists'));
     }
 
     /**
@@ -81,9 +82,16 @@ class WishlistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Wishlist $wishlist)
     {
-        //
+        
+        if($wishlist){
+            $wishlist->delete();
+
+            return redirect()->route('user.wishlist.index')->with('message', 'wishlist deleted successfully');
+        }else{
+            return ("Hi");
+        }
     }
 
     // add to wishlist mehtod 
@@ -93,18 +101,26 @@ class WishlistController extends Controller
 				if (Auth::check()) {
 
 					$exists = Wishlist::where('user_id',Auth::id())->where('product_id',$id)->first();
-		
-					Wishlist::create([
-						'user_id' => Auth::id(), 
-						'product_id' => $id, 
-						'created_at' => Carbon::now(), 
-					]);
-				   return response()->json(['success' => 'Successfully Added On Your Wishlist']);
+                    
+                    if(!$exists){
+                        Wishlist::create([
+                            'user_id' => Auth::id(), 
+                            'product_id' => $id, 
+                            'created_at' => Carbon::now(), 
+                        ]);
+                       return response()->json(['success' => 'Successfully Added On Your Wishlist']);
+                    }else{
+                        return response()->json(['error' => 'this product has already in your wishlist']);
+                    }
+					
 		
 				}else{
+                    // return redirect()->route('user.login')->with('error','At first login your account');
 		
 					return response()->json(['error' => 'At First Login Your Account']);
 		
 				}
 			}
+
+    
 }

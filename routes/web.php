@@ -72,6 +72,8 @@ Route::prefix('user')->name('user.')->group(function(){
           Route::post('/profile/password',[UserProfileController::class, 'password_update'])->name('update-password');
           Route::post('/logout',[UserController::class,'logout'])->name('logout');
           Route::get('/add-new',[UserController::class,'add'])->name('add');
+          //wishlist crud
+        Route::resource('wishlist', WishlistController::class);
 
     });
 

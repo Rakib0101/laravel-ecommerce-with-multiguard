@@ -85,6 +85,33 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Coupons</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.coupon.index')}}"><i class="ti-more"></i>Manage Coupon</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Shipping Area</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.division.index')}}"><i class="ti-more"></i>Manage Division</a></li>
+                    <li><a href="{{route('admin.district.index')}}"><i class="ti-more"></i>Manage District</a></li>
+                    <li><a href="{{route('admin.state.index')}}"><i class="ti-more"></i>Manage State</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
 

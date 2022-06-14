@@ -10,7 +10,7 @@
                         <li><a href="{{ route('user.home')}}"><i class="icon fa fa-user"></i>@if (session()->get('language')== 'bangla') 
 আমার অ্যাকাউন্ট @else My Account @endif</a></li>
                         <li><a href="{{route('user.wishlist.index')}}"><i class="icon fa fa-heart"></i>@if (session()->get('language')== 'bangla') ইচ্ছেতালিকা @else Wishlish @endif</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+                        <li><a href="{{route('my-cart')}}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
                         <li>
                             @auth

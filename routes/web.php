@@ -8,6 +8,7 @@ use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\Backend\BrandsController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -17,6 +18,9 @@ use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\ShippingStateController;
+use App\Http\Controllers\Backend\ShippingDistrictController;
+use App\Http\Controllers\Backend\ShippingDivisionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +49,11 @@ Route::get('/product/{product:id}', [FrontendController::class, 'productDetails'
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']); 
 // Get Data from cart
 Route::get('/product/mini/cart/', [CartController::class, 'getCart']);
+// Get Data from cart
+Route::get('/user/cart', [CartController::class, 'index'])->name('my-cart');
+Route::get('/cart/', [CartController::class, 'myCart']);
+Route::get('/cart-increment/{rowId}', [CartController::class, 'CartIncrement']);
+Route::get('/cart-decrement/{rowId}', [CartController::class, 'CartDecrement']);
 // Remove mini cart
 Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'removeCart']);
 //wishlist
@@ -117,6 +126,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //product crud 
         Route::resource('slider', SliderController::class);
 
+        //coupon crud 
+        Route::resource('coupon', CouponController::class);
+
+        //shipping division crud 
+        Route::resource('division', ShippingDivisionController::class);
+
+        //shipping district crud 
+        Route::resource('district', ShippingDistrictController::class);
+
+        //product state crud 
+        Route::resource('state', ShippingStateController::class);
+
         Route::post('/image/update', [ProductController::class, 'UpdateImage'])->name('product.updateThambnail');
     });
 
@@ -130,3 +151,6 @@ Route::get('/language/bangla}', [LanguageController::class, 'bangla'])->name('la
 Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
 
 Route::get('/sub-subcategory/ajax/{sub_category_id}', [SubCategoryController::class, 'GetChildCategory']);
+
+Route::get('/district/ajax/{division_id}', [ShippingDivisionController::class, 'GetDistrict']);
+Route::get('/state/ajax/{district_id}', [ShippingDivisionController::class, 'GetState']);

@@ -456,6 +456,7 @@
                                     </div>
                                     <div class="cart-sub-total">
                                         Coupon<span class="inner-left-md">${data.coupon_code}</span>
+                                        <button type="submit" onclick="couponRemove"><i class="fa fa-times"></i></button>
                                     </div>
                                     <div class="cart-sub-total">
                                         Discount Amount<span class="inner-left-md">$ ${data.discount_amount}</span>

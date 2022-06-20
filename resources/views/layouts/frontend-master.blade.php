@@ -133,7 +133,6 @@
             })
 
         }
-
     </script>
 
     <script type="text/javascript">
@@ -183,7 +182,6 @@
             })
         }
         getCart()
-
     </script>
 
     <script type="text/javascript">
@@ -224,16 +222,17 @@
         }
 
         getCart()
-
     </script>
 
     <script type="text/javascript">
         function getCartPage() {
+
             $.ajax({
                 type: 'GET',
                 url: '/cart',
                 dataType: 'json',
                 success: function (response) {
+                    
                     console.log(response)
                     $('#cartSubTotal').text(response.cartTotal);
                     $('#cartTotal').text(response.cartTotal);
@@ -283,12 +282,12 @@
         }
 
         getCartPage()
-
     </script>
 
     <script type="text/javascript">
         /// cart remove Start
         function cartRemove(rowId) {
+
             $.ajax({
                 type: 'GET',
                 url: '/product/mini/cart/remove/' + rowId,
@@ -322,7 +321,6 @@
         }
 
         //  end cart remove
-
     </script>
 
     <script type="text/javascript">
@@ -371,6 +369,7 @@
                 success: function (data) {
                     getCartPage();
                     getCart();
+                    couponCalc();
                 }
             });
         }
@@ -385,6 +384,7 @@
                 success: function (data) {
                     getCartPage();
                     getCart();
+                    couponCalc();
                 }
             });
         }
@@ -404,7 +404,8 @@
 
                 success: function (data) {
                     console.log(data);
-
+                    couponCalc();
+                    $('#couponField').hide();
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -447,7 +448,7 @@
                                 </th>
                             </tr>`
                         )
-                    }else{
+                    } else {
                         $('#couponCalField').html(
                             `<tr>
                                 <th>
@@ -456,7 +457,7 @@
                                     </div>
                                     <div class="cart-sub-total">
                                         Coupon<span class="inner-left-md">${data.coupon_code}</span>
-                                        <button type="submit" onclick=""><i class="fa fa-times"></i></button>
+                                        <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i></button>
                                     </div>
                                     <div class="cart-sub-total">
                                         Discount Amount<span class="inner-left-md">$ ${data.discount_amount}</span>
@@ -474,6 +475,41 @@
 
         couponCalc();
 
+
+        function couponRemove() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/coupon-remove') }}",
+                dataType: 'json',
+                success: function (data) {
+                    couponCalc();
+                    $('#couponField').show();
+                    $('#coupon_name').val('');
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message 
+                }
+            });
+        }
     </script>
 
 </body>

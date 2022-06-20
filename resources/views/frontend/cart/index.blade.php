@@ -98,7 +98,7 @@
 
 <div class="col-md-4 col-sm-12 estimate-ship-tax">
     @if(!Session::has('coupon'))
-	<table class="table">
+	<table class="table" id="couponField">
 		<thead>
 			<tr>
 				<th>

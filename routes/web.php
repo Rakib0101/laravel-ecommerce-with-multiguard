@@ -51,7 +51,7 @@ Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 Route::get('/product/mini/cart/', [CartController::class, 'getCart']);
 // Get Data from cart
 Route::get('/user/cart', [CartController::class, 'index'])->name('my-cart');
-Route::get('/cart/', [CartController::class, 'myCart']);
+Route::get('/cart', [CartController::class, 'myCart']);
 Route::get('/cart-increment/{rowId}', [CartController::class, 'CartIncrement']);
 Route::get('/cart-decrement/{rowId}', [CartController::class, 'CartDecrement']);
 // Remove mini cart
@@ -60,6 +60,8 @@ Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'removeC
 Route::post('/add-to-wishlist/{id}', [WishlistController::class, 'AddToWishlist']);
 Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
 Route::get('/coupon-calc', [CartController::class, 'CouponCalc']);
+Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
 
 
 

@@ -455,7 +455,7 @@
                                         Subtotal<span class="inner-left-md">$ ${data.subtotal}</span>
                                     </div>
                                     <div class="cart-sub-total">
-                                        Coupon<span class="inner-left-md">$ ${data.coupon_code}</span>
+                                        Coupon<span class="inner-left-md">${data.coupon_code}</span>
                                     </div>
                                     <div class="cart-sub-total">
                                         Discount Amount<span class="inner-left-md">$ ${data.discount_amount}</span>

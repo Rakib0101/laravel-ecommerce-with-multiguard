@@ -148,13 +148,13 @@ class CartController extends Controller
 
         public function CouponCalc(){
             if(Session::has('coupon')){
-                return response()->json(array(
+                return response()->json([
                     'subtotal' => Cart::total(),
                     'coupon_code' => session()->get('coupon')['coupon_code'],
                     'discount_value' => session()->get('coupon')['discount_value'],
                     'discount_amount' => session()->get('coupon')['discount_amount'],
                     'total_amount' => session()->get('coupon')['total_amount'],
-                ));
+                ]);
             }else{
                 return response()->json([
                     'total' => Cart::total(),

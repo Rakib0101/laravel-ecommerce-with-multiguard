@@ -32,23 +32,24 @@
 			<tfoot>
 				<tr>
 					<td colspan="7">
-						<div class="shopping-cart-btn">
+						<!-- <div class="shopping-cart-btn">
 							<span class="">
 								<a href="#" class="btn btn-upper btn-primary outer-left-xs">Continue Shopping</a>
 								<a href="#" class="btn btn-upper btn-primary pull-right outer-right-xs">Update shopping cart</a>
 							</span>
-						</div><!-- /.shopping-cart-btn -->
+						</div> -->
 					</td>
 				</tr>
 			</tfoot>
 			<tbody id="myCart">
-                
-				
+
+
 			</tbody><!-- /tbody -->
 		</table><!-- /table -->
 	</div>
-</div><!-- /.shopping-cart-table -->				<div class="col-md-4 col-sm-12 estimate-ship-tax">
-	<table class="table">
+</div><!-- /.shopping-cart-table -->
+<div class="col-md-4 col-sm-12 estimate-ship-tax">
+	<!-- <table class="table">
 		<thead>
 			<tr>
 				<th>
@@ -56,7 +57,7 @@
 					<p>Enter your destination to get shipping and tax.</p>
 				</th>
 			</tr>
-		</thead><!-- /thead -->
+		</thead>
 		<tbody>
 				<tr>
 					<td>
@@ -92,10 +93,11 @@
 					</td>
 				</tr>
 		</tbody>
-	</table>
+	</table> -->
 </div><!-- /.estimate-ship-tax -->
 
 <div class="col-md-4 col-sm-12 estimate-ship-tax">
+    @if(!Session::has('coupon'))
 	<table class="table">
 		<thead>
 			<tr>
@@ -109,30 +111,22 @@
 				<tr>
 					<td>
 						<div class="form-group">
-							<input type="text" class="form-control unicase-form-control text-input" placeholder="You Coupon..">
+							<input type="text" class="form-control unicase-form-control text-input" placeholder="You Coupon.." id="coupon_name">
 						</div>
 						<div class="clearfix pull-right">
-							<button type="submit" class="btn-upper btn btn-primary">APPLY COUPON</button>
+							<button type="submit" class="btn-upper btn btn-primary" onclick="applyCoupon()">APPLY COUPON</button>
 						</div>
 					</td>
 				</tr>
 		</tbody><!-- /tbody -->
 	</table><!-- /table -->
+    @endif
 </div><!-- /.estimate-ship-tax -->
 
 <div class="col-md-4 col-sm-12 cart-shopping-total">
 	<table class="table">
-		<thead>
-			<tr>
-				<th>
-					<div class="cart-sub-total">
-						Subtotal<span class="inner-left-md">$600.00</span>
-					</div>
-					<div class="cart-grand-total">
-						Grand Total<span class="inner-left-md">$600.00</span>
-					</div>
-				</th>
-			</tr>
+		<thead id="couponCalField">
+
 		</thead><!-- /thead -->
 		<tbody>
 				<tr>
@@ -145,7 +139,7 @@
 				</tr>
 		</tbody><!-- /tbody -->
 	</table><!-- /table -->
-</div><!-- /.cart-shopping-total -->			
+</div><!-- /.cart-shopping-total -->
 
 
 

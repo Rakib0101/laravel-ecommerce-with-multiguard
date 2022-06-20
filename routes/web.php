@@ -46,7 +46,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/product/view/modal/{id}', [FrontendController::class, 'ProductViewAjax']);
 Route::get('/product/{product:id}', [FrontendController::class, 'productDetails'])->name('product-details');
 // Add to Cart Store Data
-Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']); 
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 // Get Data from cart
 Route::get('/product/mini/cart/', [CartController::class, 'getCart']);
 // Get Data from cart
@@ -57,7 +57,9 @@ Route::get('/cart-decrement/{rowId}', [CartController::class, 'CartDecrement']);
 // Remove mini cart
 Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'removeCart']);
 //wishlist
-Route::post('/add-to-wishlist/{id}', [WishlistController::class, 'AddToWishlist']); 
+Route::post('/add-to-wishlist/{id}', [WishlistController::class, 'AddToWishlist']);
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+Route::get('/coupon-clac', [CartController::class, 'CouponCalc']);
 
 
 
@@ -106,36 +108,36 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/profile/password',[AdminProfileController::class, 'password_update'])->name('update-password');
 
         Route::post('/logout',[AdminController::class,'logout'])->name('logout');
-        
+
 
         //brands crud
         Route::resource('brands',BrandsController::class);
 
-        //category crud 
+        //category crud
         Route::resource('category', CategoryController::class);
 
-        //sub category crud 
+        //sub category crud
         Route::resource('sub_category', SubCategoryController::class);
 
-        //child category crud 
+        //child category crud
         Route::resource('child_category', ChildCategoryController::class);
 
-        //product crud 
+        //product crud
         Route::resource('product', ProductController::class);
 
-        //product crud 
+        //product crud
         Route::resource('slider', SliderController::class);
 
-        //coupon crud 
+        //coupon crud
         Route::resource('coupon', CouponController::class);
 
-        //shipping division crud 
+        //shipping division crud
         Route::resource('division', ShippingDivisionController::class);
 
-        //shipping district crud 
+        //shipping district crud
         Route::resource('district', ShippingDistrictController::class);
 
-        //product state crud 
+        //product state crud
         Route::resource('state', ShippingStateController::class);
 
         Route::post('/image/update', [ProductController::class, 'UpdateImage'])->name('product.updateThambnail');

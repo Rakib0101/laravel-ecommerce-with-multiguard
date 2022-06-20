@@ -60,6 +60,7 @@ Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'removeC
 Route::post('/add-to-wishlist/{id}', [WishlistController::class, 'AddToWishlist']);
 Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
 Route::get('/coupon-calc', [CartController::class, 'CouponCalc']);
+Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 
 
 

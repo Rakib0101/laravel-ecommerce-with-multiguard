@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Frontend\StripeController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -92,6 +93,7 @@ Route::prefix('user')->name('user.')->group(function(){
           Route::get('/add-new',[UserController::class,'add'])->name('add');
           Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
           Route::post('/checkout/store', [ShippingController::class, 'CheckoutStore'])->name('checkout.store');
+          Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
           //wishlist crud
         Route::resource('wishlist', WishlistController::class);
 

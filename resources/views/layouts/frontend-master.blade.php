@@ -68,7 +68,7 @@ use Illuminate\Support\Facades\Session;
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+    
     {{-- Toaster Js --}}
   <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
   <script>

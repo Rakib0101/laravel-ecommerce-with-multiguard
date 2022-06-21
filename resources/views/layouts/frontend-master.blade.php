@@ -1,3 +1,4 @@
+use Illuminate\Support\Facades\Session;
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +31,9 @@
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">
 
+
+    {{-- Toaster Style --}}
+	<link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -65,7 +69,26 @@
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    {{-- Toaster Js --}}
+  <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+  <script>
+      if(Session::has('message')){
+      toastr.options = {
+          "closeButton": true,
+          "progressBar": true
+      }
+      toastr.success("{{ session('message') }}");
+    }
 
+      if(Session::has('error')){
+      toastr.options = {
+          "closeButton": true,
+          "progressBar": true
+      }
+      toastr.error("{{ session('error') }}");
+    }
+
+  </script>
 
 
     <script type="text/javascript">
@@ -232,7 +255,7 @@
                 url: '/cart',
                 dataType: 'json',
                 success: function (response) {
-                    
+
                     console.log(response)
                     $('#cartSubTotal').text(response.cartTotal);
                     $('#cartTotal').text(response.cartTotal);
@@ -457,11 +480,7 @@
                                     </div>
                                     <div class="cart-sub-total">
                                         Coupon<span class="inner-left-md">${data.coupon_code}</span>
-<<<<<<< HEAD
-                                        <button type="submit" onclick="couponRemove"><i class="fa fa-times"></i></button>
-=======
                                         <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i></button>
->>>>>>> c29b0824b6770d498281bee3b5a527f128a47ce5
                                     </div>
                                     <div class="cart-sub-total">
                                         Discount Amount<span class="inner-left-md">$ ${data.discount_amount}</span>
@@ -479,19 +498,6 @@
 
         couponCalc();
 
-<<<<<<< HEAD
-        function couponRemove(){
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                url: "{{ url(/coupon-remove) }}",
-                success: function(data){
-                    console.log(data)
-                }
-            })
-        }
-
-=======
 
         function couponRemove() {
             $.ajax({
@@ -499,10 +505,11 @@
                 url: "{{ url('/coupon-remove') }}",
                 dataType: 'json',
                 success: function (data) {
-                    couponCalc();
+
                     $('#couponField').show();
                     $('#coupon_name').val('');
-                    // Start Message 
+                    couponCalc();
+                    // Start Message
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -523,11 +530,10 @@
                             title: data.error
                         })
                     }
-                    // End Message 
+                    // End Message
                 }
             });
         }
->>>>>>> c29b0824b6770d498281bee3b5a527f128a47ce5
     </script>
 
 </body>

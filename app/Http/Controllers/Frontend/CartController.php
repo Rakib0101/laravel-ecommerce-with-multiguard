@@ -17,7 +17,7 @@ class CartController extends Controller
 {
 	public function myCart()
 	{
-		
+
 		$carts = Cart::content();
             $cartQty = Cart::count();
             $cartTotal = Cart::total();
@@ -121,12 +121,12 @@ class CartController extends Controller
 
 				$coupon_code = Session::get('coupon')['coupon_code'];
 				$coupon = Coupon::where('coupon_code',$coupon_code)->first();
-	
+
 			   Session::put('coupon',[
 					'coupon_code' => $coupon->coupon_code,
 					'discount_value' => $coupon->discount_value,
                     'discount_amount' => round(Cart::total()*$coupon->discount_value/100),
-                    'total_amount' => round(Cart::total()-Cart::total()*$coupon->discount_value/100),  
+                    'total_amount' => round(Cart::total()-Cart::total()*$coupon->discount_value/100),
 				]);
 			}
 			return response()->json('increment');
@@ -140,12 +140,12 @@ class CartController extends Controller
 
 				$coupon_code = Session::get('coupon')['coupon_code'];
 				$coupon = Coupon::where('coupon_code',$coupon_code)->first();
-	
+
 			   Session::put('coupon',[
 					'coupon_code' => $coupon->coupon_code,
 					'discount_value' => $coupon->discount_value,
                     'discount_amount' => round(Cart::total()*$coupon->discount_value/100),
-                    'total_amount' => round(Cart::total()-Cart::total()*$coupon->discount_value/100),  
+                    'total_amount' => round(Cart::total()-Cart::total()*$coupon->discount_value/100),
 				]);
 			}
 			return response()->json('decrement');
@@ -190,12 +190,8 @@ class CartController extends Controller
             }
         }
 
-<<<<<<< HEAD
-        public function 
-=======
 		public function CouponRemove(){
 			Session::forget('coupon');
 			return response()->json(['success' => 'Coupon Remove Successfully']);
 		}
->>>>>>> c29b0824b6770d498281bee3b5a527f128a47ce5
 }

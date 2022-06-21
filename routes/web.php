@@ -13,8 +13,10 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\User\UserProfileController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\ShippingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -61,10 +63,10 @@ Route::post('/add-to-wishlist/{id}', [WishlistController::class, 'AddToWishlist'
 Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
 Route::get('/coupon-calc', [CartController::class, 'CouponCalc']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
-<<<<<<< HEAD
-=======
 
->>>>>>> c29b0824b6770d498281bee3b5a527f128a47ce5
+Route::get('/district-get/ajax/{division_id}', [ShippingController::class, 'DistrictGetAjax']);
+
+Route::get('/state-get/ajax/{district_id}', [ShippingController::class, 'StateGetAjax']);
 
 
 
@@ -88,6 +90,8 @@ Route::prefix('user')->name('user.')->group(function(){
           Route::post('/profile/password',[UserProfileController::class, 'password_update'])->name('update-password');
           Route::post('/logout',[UserController::class,'logout'])->name('logout');
           Route::get('/add-new',[UserController::class,'add'])->name('add');
+          Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
+          Route::post('/checkout/store', [ShippingController::class, 'CheckoutStore'])->name('checkout.store');
           //wishlist crud
         Route::resource('wishlist', WishlistController::class);
 

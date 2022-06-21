@@ -9,25 +9,25 @@
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
     <title>RIN-eshop | Dashboard</title>
-    
+
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
-	  
-	<!-- Style-->  
+
+	<!-- Style-->
 	<link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
 	<link rel="stylesheet" href="{{ asset('backend/css/fontawesome.min.css') }}">
 
 	{{-- Toaster Style --}}
 	<link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
-   @yield('script')  
+   @yield('script')
   </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
-	
+
 <div class="wrapper">
 @include('layouts.inc.backend.header')
-  
+
   <!-- Left side column. contains the logo and sidebar -->
   @include('layouts.inc.backend.sidebar')
 
@@ -51,7 +51,7 @@
   <script src="{{ asset('assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js') }}"></script>
   <script src="{{ asset('backend/js/pages/editor.js') }}"></script>
 
-  
+
   <!-- Sunny Admin App -->
   <script src="{{ asset('backend/js/template.js') }}"></script>
   <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
@@ -59,21 +59,21 @@
   {{-- Toaster Js --}}
   <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
   <script>
-      @if(Session::has('message'))
+      if(Session::has('message')){
       toastr.options = {
           "closeButton": true,
           "progressBar": true
       }
       toastr.success("{{ session('message') }}");
-      @endif
+    }
 
-      @if(Session::has('error'))
+      if(Session::has('error')){
       toastr.options = {
           "closeButton": true,
           "progressBar": true
       }
       toastr.error("{{ session('error') }}");
-      @endif
+    }
 
   </script>
 

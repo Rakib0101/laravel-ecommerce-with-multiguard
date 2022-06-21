@@ -1,4 +1,3 @@
-use Illuminate\Support\Facades\Session;
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,13 +31,18 @@ use Illuminate\Support\Facades\Session;
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">
 
 
-    {{-- Toaster Style --}}
-	<link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
+
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
         rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+
+   <!-- Toaster -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 </head>
 
 <body class="cnt-home">
@@ -68,27 +72,45 @@ use Illuminate\Support\Facades\Session;
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
-    {{-- Toaster Js --}}
-  <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
-  <script>
-      if(Session::has('message')){
-      toastr.options = {
-          "closeButton": true,
-          "progressBar": true
-      }
-      toastr.success("{{ session('message') }}");
-    }
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if(Session::has('success'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.success("{{ session('success') }}");
+        @endif
 
-      if(Session::has('error')){
-      toastr.options = {
-          "closeButton": true,
-          "progressBar": true
-      }
-      toastr.error("{{ session('error') }}");
-    }
+        @if(Session::has('error'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.error("{{ session('error') }}");
+        @endif
 
-  </script>
+        @if(Session::has('info'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.info("{{ session('info') }}");
+        @endif
+
+        @if(Session::has('warning'))
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.warning("{{ session('warning') }}");
+        @endif
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        })
+
+    </script> -->
+
 
 
     <script type="text/javascript">

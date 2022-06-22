@@ -26,9 +26,9 @@ class ShippingController extends Controller
     	if ($request->payment_method == 'stripe') {
     		return view('frontend.payment.stripe',compact(['cartTotal', 'data']));
     	}elseif ($request->payment_method == 'card') {
-    		return view('frontend.payment.card',compact('data'));
+    		return view('frontend.payment.card',compact(['cartTotal', 'data']));
     	}else{
-            return view('frontend.payment.cash',compact('data'));
+            return view('frontend.payment.cash',compact(['cartTotal', 'data']));
     	}
     }
 

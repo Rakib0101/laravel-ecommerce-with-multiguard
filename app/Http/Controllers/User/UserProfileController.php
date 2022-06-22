@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +30,7 @@ class UserProfileController extends Controller
         // return "Hi";
         $userId = Auth::user()->id;
         $user = User::find($userId);
-        
+
         $user->name = $request->name;
         $user->email = $request->email;
         // dd($request);
@@ -79,7 +81,7 @@ class UserProfileController extends Controller
         $hashPassword = $user->password;
 
         if(Hash::check($request->oldpassword, $hashPassword)){
-            
+
             $user->password = Hash::make($request->password);
             $user->save();
             Auth::logout();
@@ -87,5 +89,22 @@ class UserProfileController extends Controller
         }else{
             return redirect()->back();
         }
+    }
+
+    public function MyOrders()
+    {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $orders = Order::where('user_id', Auth::id())->orderBy('id', 'DESC')->get();
+        return view('dashboard.user.order', compact(['orders', 'user']));
+    }
+
+    public function SingleOrder($id)
+    {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $order = Order::where('id',$id)->where('user_id',Auth::id())->first();
+    	$orderItem = OrderItem::with('product')->where('order_id',$id)->orderBy('id','DESC')->get();
+    	return view('dashboard.user.order-details',compact(['order','orderItem', 'user']));
     }
 }

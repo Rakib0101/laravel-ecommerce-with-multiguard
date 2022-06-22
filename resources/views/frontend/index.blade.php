@@ -80,7 +80,7 @@
                         </li>
                         <!-- /.menu-item -->
                             @endforeach
-                            
+
 
                         </ul>
                         <!-- /.nav -->
@@ -363,7 +363,7 @@
                                                 <div class="col col-xs-5">
                                                     <div class="product-image">
                                                         <div class="image"> <a href="#"> <img
-                                                                    src="{{ asset('assets/images/products/p27.jpg') }}"
+                                                                    src="{{ asset('frontend/assets/images/products/p27.jpg') }}"
                                                                     alt=""> </a> </div>
                                                         <!-- /.image -->
 
@@ -949,7 +949,7 @@
                 <div id="hero">
                     <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
                         @foreach ($sliders as $slider)
-                        <div class="item" style="background-image: url({{ asset($slider->image) }});">
+                        <div class="item" style="background-image: url("{{ asset($slider->image) }}")">
                             <div class="container-fluid">
                                 <div class="caption bg-color vertical-center text-left">
                                     <div class="slider-header fadeInDown-1">{{$slider->title}}</div>
@@ -962,7 +962,7 @@
                                 <!-- /.caption -->
                             </div>
                             <!-- /.container-fluid -->
-                        </div> 
+                        </div>
                         @endforeach
 
                     </div>
@@ -1063,7 +1063,7 @@
                                                     @endif
                                                 </div>
                                                 <!-- /.product-image -->
-                
+
                                                 <div class="product-info text-left">
                                                     <h3 class="name"><a href="{{ route('product-details', $product->id)}}">{{ $product->product_name_en }}</a>
                                                     </h3>
@@ -1077,16 +1077,16 @@
                                                             {{ $product->regular_price }}</span>
                                                         @endif </div>
                                                     <!-- /.product-price -->
-                
+
                                                 </div>
                                                 <!-- /.product-info -->
                                                 <div class="cart clearfix animate-effect">
                                                     <div class="action">
                                                       <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
-                                                  
+
                                                           <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal"  id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
-                                                  
+
                                                           <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                         </li>
                                                         <li class="add-cart-button btn-group"> <button class="btn btn-primary icon" type="button"  title="Wishlist"  onclick="wishlist('{{$product->id}}')"> <i class="icon fa fa-heart"></i> </button> </li>
@@ -1097,7 +1097,7 @@
                                                 <!-- /.cart -->
                                             </div>
                                             <!-- /.product -->
-                
+
                                         </div>
                                         <!-- /.products -->
                                     </div>
@@ -1137,14 +1137,14 @@
                                                     @endif
                                                 </div>
                                                 <!-- /.product-image -->
-                
+
                                                 <div class="product-info text-left">
                                                     <h3 class="name"><a href="{{ route('product-details', $product->id)}}">{{ $product->product_name_en }}</a>
                                                     </h3>
                                                     <div class="rating rateit-small"></div>
                                                     <div class="description"></div>
                                                     <div class="product-price"><span class="price">
-                                                            
+
                                                             ${{ $product->selling_price !== null ? ($product->regular_price - $product->selling_price) : $product->regular_price   }}
                                                         </span>
                                                         @if($product->selling_price !== NULL)
@@ -1152,14 +1152,14 @@
                                                             {{ $product->regular_price }}</span>
                                                         @endif </div>
                                                     <!-- /.product-price -->
-                
+
                                                 </div>
                                                 <!-- /.product-info -->
                                                 <div class="cart clearfix animate-effect">
                                                     <div class="action">
                                                         <ul class="list-unstyled">
                                                             <li class="add-cart-button btn-group">
-                                                                <button 
+                                                                <button
                                                                     class="btn btn-primary icon" type="button"
                                                                     title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i
                                                                         class="fa fa-shopping-cart"></i> </button>
@@ -1181,7 +1181,7 @@
                                                 <!-- /.cart -->
                                             </div>
                                             <!-- /.product -->
-                
+
                                         </div>
                                         <!-- /.products -->
                                     </div>
@@ -1199,7 +1199,7 @@
                         @break
                         @endif
                         @endforeach
-                
+
                     </div>
                     <!-- /.tab-content -->
                 </div>
@@ -1286,9 +1286,9 @@
                             <!-- /.products -->
                         </div>
                         <!-- /.item -->
- 
+
                         @endforeach
-                        
+
                     </div>
                     <!-- /.home-owl-carousel -->
                 </section>
@@ -1467,10 +1467,10 @@
                                                 <div class="col col-xs-5">
                                                     <div class="product-image">
                                                         <div class="image"> <a href="#"> <img src="{{ asset('frontend/assets/images/products/p24.jpg') }}" alt=""> </a> </div>
-                            <!-- /.image --> 
-                            
+                            <!-- /.image -->
+
                           </div>
-                          <!-- /.product-image --> 
+                          <!-- /.product-image -->
                         </div>
                         <!-- /.col -->
                         <div class="col2 col-xs-7">
@@ -1478,24 +1478,24 @@
                             <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
                             <div class="rating rateit-small"></div>
                             <div class="product-price"> <span class="price"> $450.99 </span> </div>
-                            <!-- /.product-price --> 
-                            
+                            <!-- /.product-price -->
+
                           </div>
                         </div>
-                        <!-- /.col --> 
+                        <!-- /.col -->
                       </div>
-                      <!-- /.product-micro-row --> 
+                      <!-- /.product-micro-row -->
                     </div>
-                    <!-- /.product-micro --> 
-                    
+                    <!-- /.product-micro -->
+
                   </div>
                   <div class="product">
                     <div class="product-micro">
                       <div class="row product-micro-row">
                         <div class="col col-xs-5">
                           <div class="product-image">
-                            <div class="image"> 
-                                <a href="#"> 
+                            <div class="image">
+                                <a href="#">
                                     <img src="{{ asset('frontend/assets/images/products/p25.jpg') }}" alt="">
                                                             </a>
                                                         </div>

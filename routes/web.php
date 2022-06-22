@@ -6,6 +6,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CashController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\CouponController;
@@ -91,9 +92,12 @@ Route::prefix('user')->name('user.')->group(function(){
           Route::post('/profile/password',[UserProfileController::class, 'password_update'])->name('update-password');
           Route::post('/logout',[UserController::class,'logout'])->name('logout');
           Route::get('/add-new',[UserController::class,'add'])->name('add');
+          Route::get('/my-order',[UserProfileController::class,'MyOrders'])->name('my-order');
+          Route::get('/my-order/{id}',[UserProfileController::class,'SingleOrder'])->name('order-details');
           Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
           Route::post('/checkout/store', [ShippingController::class, 'CheckoutStore'])->name('checkout.store');
           Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+          Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
           //wishlist crud
         Route::resource('wishlist', WishlistController::class);
 

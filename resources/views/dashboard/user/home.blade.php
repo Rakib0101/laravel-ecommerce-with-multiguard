@@ -26,6 +26,8 @@
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
                                 href="{{ route('user.change-password') }}">Change Password</a></li>
                         <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
+                                href="{{ route('user.my-order') }}">My Orders</a></li>
+                        <li style="border-bottom: 1px solid #ddd; padding:4px 0px;"><a style="font-size: 16px;"
                                 href="{{ route('user.logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                             <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form"></form>

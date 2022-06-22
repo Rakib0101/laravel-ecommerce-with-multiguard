@@ -13,29 +13,22 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class StripeController extends Controller
+class CashController extends Controller
 {
-    public function StripeOrder(Request $request){
+    public function CashOrder(Request $request){
 
-        if (Session::has('coupon')) {
+
+    	if (Session::has('coupon')) {
     		$total_amount = Session::get('coupon')['total_amount'];
     	}else{
     		$total_amount = round(Cart::total());
     	}
 
-        \Stripe\Stripe::setApiKey('sk_test_51KD5r7F2NFuyTuJd1UXTqXBsSxWjqTRYMs1nC60j0WNWqN1GmnEhaDv7StzXBUfMbGGvcWgmrf7ebPJYOpKq6MT700nVWLl84s');
 
 
-        $token = $_POST['stripeToken'];
-        $charge = \Stripe\Charge::create([
-            'amount' => $total_amount*100,
-          'currency' => 'usd',
-          'description' => 'Easy Online Store',
-          'source' => $token,
-          'metadata' => ['order_id' => uniqid()],
-        ]);
+	  // dd($charge);
 
-        $order_id = Order::insertGetId([
+     $order_id = Order::insertGetId([
      	'user_id' => Auth::id(),
      	'division_id' => $request->division_id,
      	'district_id' => $request->district_id,
@@ -46,13 +39,12 @@ class StripeController extends Controller
      	'post_code' => $request->post_code,
      	'notes' => $request->notes,
 
-     	'payment_type' => 'Stripe',
-     	'payment_method' => 'Stripe',
-     	'payment_type' => $charge->payment_method,
-     	'transaction_id' => $charge->balance_transaction,
-     	'currency' => $charge->currency,
+     	'payment_type' => 'Cash On Delivery',
+     	'payment_method' => 'Cash On Delivery',
+
+     	'currency' =>  'Usd',
      	'amount' => $total_amount,
-     	'order_number' => $charge->metadata->order_id,
+
 
      	'invoice_no' => 'EOS'.mt_rand(10000000,99999999),
      	'order_date' => Carbon::now()->format('d F Y'),
@@ -63,18 +55,19 @@ class StripeController extends Controller
 
      ]);
 
-        // Start Send Email
+     // Start Send Email
      $invoice = Order::findOrFail($order_id);
-     $data = [
-         'invoice_no' => $invoice->invoice_no,
-         'amount' => $total_amount,
-         'name' => $invoice->name,
-         'email' => $invoice->email,
-     ];
+     	$data = [
+     		'invoice_no' => $invoice->invoice_no,
+     		'amount' => $total_amount,
+     		'name' => $invoice->name,
+     	    'email' => $invoice->email,
+     	];
 
-     Mail::to($request->email)->send(new OrderMail($data));
+     	Mail::to($request->email)->send(new OrderMail($data));
 
- // End Send Email
+     // End Send Email
+
 
      $carts = Cart::content();
      foreach ($carts as $cart) {
@@ -97,7 +90,14 @@ class StripeController extends Controller
 
      Cart::destroy();
 
-	return redirect()->route('user.home')->with('info', 'Your Order Place Successfully');
+     $notification = array(
+			'message' => 'Your Order Place Successfully',
+			'alert-type' => 'success'
+		);
+
+		return redirect()->route('user.home')->with($notification);
+
 
     } // end method
+
 }

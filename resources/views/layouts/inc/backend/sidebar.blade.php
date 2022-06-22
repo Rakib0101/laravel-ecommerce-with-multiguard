@@ -112,6 +112,25 @@
                     <li><a href="{{route('admin.state.index')}}"><i class="ti-more"></i>Manage State</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Orders</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin.order.pending')}}"><i class="ti-more"></i>Pending Orders</a></li>
+                    <li><a href="{{route('admin.order.cancel')}}"><i class="ti-more"></i>Cancel Orders</a></li>
+                    <li><a href="{{route('admin.order.confirmed')}}"><i class="ti-more"></i>Confirm Orders</a></li>
+                    <li><a href="{{route('admin.order.processing')}}"><i class="ti-more"></i>Processing Orders</a></li>
+                    <li><a href="{{route('admin.order.delivered')}}"><i class="ti-more"></i>Delivered Orders</a></li>
+                    <li><a href="{{route('admin.order.picked')}}"><i class="ti-more"></i>Picked Orders</a></li>
+                    <li><a href="{{route('admin.order.shipped')}}"><i class="ti-more"></i>Shipped Orders</a></li>
+
+                </ul>
+            </li>
         </ul>
     </section>
 

@@ -40,14 +40,70 @@
             <div class="col-lg-9">
                 <h4 style="text-align: center;">Welcome Mr {{Auth::user()->name}} to your dashboard !!</h4>
                 <div class="row">
-                    <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="card col-12">
-                        <div class="card-header">
-                            <h4>Order Details
-                                <span class="text-danger"> Invoice : {{ $order->invoice_no }}</span></h4>
+                    <div class="col-md-6 col-12">
+                        <div class="box box-bordered border-primary" style="border: 1px solid #2f2f2f; border-radius: 5px;">
+                            <div class="box-header with-border">
+                                <h4 class="box-title"><strong>Shipping Details</strong> </h4>
+                            </div>
+
+
+                            <table class="table">
+                                <tr>
+                                    <th> Shipping Name : </th>
+                                    <th> {{ $order->name }} </th>
+                                </tr>
+
+                                <tr>
+                                    <th> Shipping Phone : </th>
+                                    <th> {{ $order->phone }} </th>
+                                </tr>
+
+                                <tr>
+                                    <th> Shipping Email : </th>
+                                    <th> {{ $order->email }} </th>
+                                </tr>
+
+                                <tr>
+                                    <th> Division : </th>
+                                    <th> {{ $order->division->division_name }} </th>
+                                </tr>
+
+                                <tr>
+                                    <th> District : </th>
+                                    <th> {{ $order->district->district_name }} </th>
+                                </tr>
+
+                                <tr>
+                                    <th> State : </th>
+                                    <th>{{ $order->state->state_name }} </th>
+                                </tr>
+
+                                <tr>
+                                    <th> Post Code : </th>
+                                    <th> {{ $order->post_code }} </th>
+                                </tr>
+
+                                <tr>
+                                    <th> Order Date : </th>
+                                    <th> {{ $order->order_date }} </th>
+                                </tr>
+
+                            </table>
+
+
+
                         </div>
-                        <hr>
-                        <div class="card-body" style="background: #E9EBEC;">
+                    </div> <!--  // cod md -6 -->
+
+
+                    <div class="col-md-6 col-12">
+                        <div class="box box-bordered border-primary" style="border: 1px solid #2f2f2f; border-radius: 5px;">
+                            <div class="box-header with-border">
+                                <h4 class="box-title"><strong>Order Details</strong><span class="text-danger"> Invoice :
+                                        {{ $order->invoice_no }}</span></h4>
+                            </div>
+
+
                             <table class="table">
                                 <tr>
                                     <th> Name : </th>
@@ -76,7 +132,7 @@
 
                                 <tr>
                                     <th> Order Total : </th>
-                                    <th>{{ $order->amount }} </th>
+                                    <th>${{ $order->amount }} </th>
                                 </tr>
 
                                 <tr>
@@ -91,47 +147,52 @@
                             </table>
 
 
+
                         </div>
-
-                    </div>
-
-                </div> <!-- // 2ND end col md -5 -->
+                    </div> <!--  // cod md -6 -->
 
 
-                <div class="row">
-                    <div class="col-12">
 
-                        <div class="table-responsive">
+
+
+                    <div class="col-md-12 col-12">
+                        <div class="box box-bordered border-primary" style="border: 1px solid #2f2f2f; border-radius: 20px; margin: 10px 0px;">
+                            <div class="box-header with-border">
+
+                            </div>
+
+
+
                             <table class="table">
                                 <tbody>
 
-                                    <tr style="background: #e2e2e2;">
-                                        <td class="col-md-1">
+                                    <tr>
+                                        <td width="10%">
                                             <label for=""> Image</label>
                                         </td>
 
-                                        <td class="col-md-3">
+                                        <td width="20%">
                                             <label for=""> Product Name </label>
                                         </td>
 
-                                        <td class="col-md-3">
+                                        <td width="10%">
                                             <label for=""> Product Code</label>
                                         </td>
 
 
-                                        <td class="col-md-2">
+                                        <td width="10%">
                                             <label for=""> Color </label>
                                         </td>
 
-                                        <td class="col-md-2">
+                                        <td width="10%">
                                             <label for=""> Size </label>
                                         </td>
 
-                                        <td class="col-md-1">
+                                        <td width="10%">
                                             <label for=""> Quantity </label>
                                         </td>
 
-                                        <td class="col-md-1">
+                                        <td width="10%">
                                             <label for=""> Price </label>
                                         </td>
 
@@ -140,33 +201,33 @@
 
                                     @foreach($orderItem as $item)
                                     <tr>
-                                        <td class="col-md-1">
+                                        <td width="10%">
                                             <label for=""><img src="{{ asset($item->product->product_thambnail) }}"
                                                     height="50px;" width="50px;"> </label>
                                         </td>
 
-                                        <td class="col-md-3">
+                                        <td width="20%">
                                             <label for=""> {{ $item->product->product_name_en }}</label>
                                         </td>
 
 
-                                        <td class="col-md-3">
+                                        <td width="10%">
                                             <label for=""> {{ $item->product->product_code }}</label>
                                         </td>
 
-                                        <td class="col-md-2">
+                                        <td width="10%">
                                             <label for=""> {{ $item->color }}</label>
                                         </td>
 
-                                        <td class="col-md-2">
+                                        <td width="10%">
                                             <label for=""> {{ $item->size }}</label>
                                         </td>
 
-                                        <td class="col-md-2">
+                                        <td width="10%">
                                             <label for=""> {{ $item->qty }}</label>
                                         </td>
 
-                                        <td class="col-md-2">
+                                        <td width="10%">
                                             <label for=""> ${{ $item->price }} ( $ {{ $item->price * $item->qty}} )
                                             </label>
                                         </td>
@@ -183,8 +244,18 @@
                             </table>
 
 
+
+
+
+
+
+
+
+
+
                         </div>
-                    </div>
+                    </div> <!--  // cod md -12 -->
+
                 </div>
             </div>
         </div>

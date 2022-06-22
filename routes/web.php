@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Doctor\DoctorController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CashController;
@@ -94,6 +95,7 @@ Route::prefix('user')->name('user.')->group(function(){
           Route::get('/add-new',[UserController::class,'add'])->name('add');
           Route::get('/my-order',[UserProfileController::class,'MyOrders'])->name('my-order');
           Route::get('/my-order/{id}',[UserProfileController::class,'SingleOrder'])->name('order-details');
+          Route::get('/invoice/{id}',[UserProfileController::class,'Invoice'])->name('invoice');
           Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout');
           Route::post('/checkout/store', [ShippingController::class, 'CheckoutStore'])->name('checkout.store');
           Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
@@ -154,6 +156,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //product state crud
         Route::resource('state', ShippingStateController::class);
+
+        Route::get('/pending-order',[OrderController::class,'PendingOrders'])->name('order.pending');
+        Route::get('/processing-order',[OrderController::class,'ProcessingOrders'])->name('order.processing');
+        Route::get('/confirmed-order',[OrderController::class,'ConfirmedOrders'])->name('order.confirmed');
+        Route::get('/delivered-order',[OrderController::class,'DeliveredOrders'])->name('order.delivered');
+        Route::get('/picked-order',[OrderController::class,'PickedOrders'])->name('order.picked');
+        Route::get('/shipped-order',[OrderController::class,'ShippedOrders'])->name('order.shipped');
+        Route::get('/cancel-order',[OrderController::class,'CancelOrders'])->name('order.cancel');
+        Route::get('/pending-order/{order_id}',[OrderController::class,'PendingOrdersDetails'])->name('order.pending-details');
+
 
         Route::post('/image/update', [ProductController::class, 'UpdateImage'])->name('product.updateThambnail');
     });

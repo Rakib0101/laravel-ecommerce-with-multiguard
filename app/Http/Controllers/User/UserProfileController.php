@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -106,5 +107,19 @@ class UserProfileController extends Controller
         $order = Order::where('id',$id)->where('user_id',Auth::id())->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$id)->orderBy('id','DESC')->get();
     	return view('dashboard.user.order-details',compact(['order','orderItem', 'user']));
+    }
+
+    public function Invoice($id)
+    {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $order = Order::where('id',$id)->where('user_id',Auth::id())->first();
+    	$orderItem = OrderItem::with('product')->where('order_id',$id)->orderBy('id','DESC')->get();
+        $pdf = PDF::loadView('dashboard.user.invoice',compact(['order','orderItem', 'user']))->setPaper('a4')->setOptions([
+				'tempDir' => public_path(),
+				'chroot' => public_path(),
+		]);
+        return $pdf->download('invoice.pdf');
+    	//return view('dashboard.user.invoice',compact(['order','orderItem', 'user']));
     }
 }

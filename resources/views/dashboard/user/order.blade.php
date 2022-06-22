@@ -104,7 +104,7 @@
                                     <td class="col-md-1">
                                         <a href="{{ route('user.order-details', $order->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
 
-                                        <a href="" class="btn btn-sm btn-danger"><i class="fa fa-download"
+                                        <a target="_blank" href="{{ route('user.invoice', $order->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-download"
                                                 style="color: white;"></i> Invoice </a>
 
                                     </td>

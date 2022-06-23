@@ -121,15 +121,29 @@
                                 style="background: #418DB9;">{{ $order->status }} </span> </th>
                     </tr>
                     <tr>
-                        <th>  </th>
-                         <th>
-                             @if($order->status == 'Pending')
-                             <a href="" class="btn btn-block btn-success" id="confirm">Confirm Order</a>
+                        <th> </th>
+                        <th>
+                            @if($order->status == 'Pending')
+                            <a href="{{ route('admin.pending-confirm', $order->id) }}" class="btn btn-block btn-success"
+                                id="confirm">Confirm Order</a>
+                            @elseif($order->status == 'confirm')
+                            <a href="{{ route('admin.confirm-processing',$order->id) }}" class="btn btn-block btn-success"
+                                id="processing">Processing Order</a>
 
-                             @endif
+                            @elseif($order->status == 'processing')
+                            <a href="{{ route('admin.processing-picked',$order->id) }}" class="btn btn-block btn-success"
+                                id="picked">Picked Order</a>
 
-                           </th>
-                      </tr>
+                            @elseif($order->status == 'picked')
+                            <a href="{{ route('admin.picked-shipped',$order->id) }}" class="btn btn-block btn-success"
+                                id="shipped">Shipped Order</a>
+
+                            @elseif($order->status == 'shipped')
+                            <a href="{{ route('admin.shipped-delivered',$order->id) }}" class="btn btn-block btn-success"
+                                id="delivered">Delivered Order</a>
+                            @endif
+                        </th>
+                    </tr>
 
                 </table>
 

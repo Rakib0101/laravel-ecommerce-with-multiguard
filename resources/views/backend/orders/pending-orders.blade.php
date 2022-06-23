@@ -36,7 +36,7 @@
                                     <th>Amount </th>
                                     <th>Payment </th>
                                     <th>Status </th>
-                                    <th>Action</th>
+                                    <th>Update</th>
 
                                 </tr>
                             </thead>
@@ -50,12 +50,11 @@
                                     <td> {{ $item->payment_method }} </td>
                                     <td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span> </td>
 
-                                    <td width="25%">
-                                        <a href="{{ route('admin.order.pending-details',$item->id) }}" class="btn btn-info"
-                                            title="Edit Data"><i class="fa fa-pencil"></i> </a>
-                                        <a href="{{ route('admin.coupon.destroy',$item->id) }}" class="btn btn-danger"
-                                            title="Delete Data" id="delete">
-                                            <i class="fa fa-trash"></i></a>
+                                    <td>
+                                        @if($item->status == 'Pending')
+                                        <a href="{{ route('admin.pending-confirm', $item->id) }}"
+                                            class="btn btn-block btn-success" id="confirm">Confirm Order</a>
+                                        @endif
                                     </td>
 
                                 </tr>

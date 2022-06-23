@@ -121,6 +121,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    <li><a href="{{route('admin.order.all')}}"><i class="ti-more"></i>All Orders</a></li>
                     <li><a href="{{route('admin.order.pending')}}"><i class="ti-more"></i>Pending Orders</a></li>
                     <li><a href="{{route('admin.order.cancel')}}"><i class="ti-more"></i>Cancel Orders</a></li>
                     <li><a href="{{route('admin.order.confirmed')}}"><i class="ti-more"></i>Confirm Orders</a></li>
@@ -130,6 +131,9 @@
                     <li><a href="{{route('admin.order.shipped')}}"><i class="ti-more"></i>Shipped Orders</a></li>
 
                 </ul>
+            </li>
+            <li style="margin-top: 50px;">
+                <a href="{{route('home')}}" style="background-color: green; color:black; text-align:center; display:block;">View Website</a>
             </li>
         </ul>
     </section>

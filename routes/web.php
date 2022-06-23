@@ -157,6 +157,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //product state crud
         Route::resource('state', ShippingStateController::class);
 
+        Route::get('/order-list',[OrderController::class,'All'])->name('order.all');
         Route::get('/pending-order',[OrderController::class,'PendingOrders'])->name('order.pending');
         Route::get('/processing-order',[OrderController::class,'ProcessingOrders'])->name('order.processing');
         Route::get('/confirmed-order',[OrderController::class,'ConfirmedOrders'])->name('order.confirmed');
@@ -166,6 +167,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/cancel-order',[OrderController::class,'CancelOrders'])->name('order.cancel');
         Route::get('/pending-order/{order_id}',[OrderController::class,'PendingOrdersDetails'])->name('order.pending-details');
 
+        //pending to confirm
+        Route::get('/pending-confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending-confirm');
+        Route::get('/confirm-processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm-processing');
+        Route::get('/processing-picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing-picked');
+        Route::get('/picked-shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked-shipped');
+        Route::get('/shipped-delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped-delivered');
 
         Route::post('/image/update', [ProductController::class, 'UpdateImage'])->name('product.updateThambnail');
     });

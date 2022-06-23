@@ -51,11 +51,10 @@
                                     <td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span> </td>
 
                                     <td width="25%">
-                                        <a href="{{ route('admin.order.pending-details',$item->id) }}" class="btn btn-info"
-                                            title="Edit Data"><i class="fa fa-pencil"></i> </a>
-                                        <a href="{{ route('admin.coupon.destroy',$item->id) }}" class="btn btn-danger"
-                                            title="Delete Data" id="delete">
-                                            <i class="fa fa-trash"></i></a>
+                                        @if($item->status == 'processing')
+                                        <a href="{{ route('admin.processing-picked',$item->id) }}"
+                                            class="btn btn-block btn-success" id="picked">Picked Order</a>
+                                        @endif
                                     </td>
 
                                 </tr>

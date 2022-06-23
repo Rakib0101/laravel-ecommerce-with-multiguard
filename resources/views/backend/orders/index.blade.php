@@ -23,7 +23,7 @@
 
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Pending Orders List</h3>
+                    <h3 class="box-title">All Orders List</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -51,10 +51,8 @@
                                     <td> <span class="badge badge-pill badge-primary">{{ $item->status }} </span> </td>
 
                                     <td width="25%">
-                                        @if($item->status == 'shipped')
-                                        <a href="{{ route('admin.shipped-delivered',$item->id) }}"
-                                            class="btn btn-block btn-success" id="shipped">Deliveredpsie Order</a>
-                                        @endif
+                                        <a href="{{ route('admin.order.pending-details',$item->id) }}" class="btn btn-info"
+                                            title="Edit Data"><i class="fa fa-eye"></i> </a>
                                     </td>
 
                                 </tr>
